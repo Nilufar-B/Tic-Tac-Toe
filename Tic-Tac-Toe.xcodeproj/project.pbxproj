@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		A317E0552AB21687001DA60D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A317E0542AB21687001DA60D /* AppDelegate.swift */; };
 		A317E0572AB21687001DA60D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A317E0562AB21687001DA60D /* SceneDelegate.swift */; };
-		A317E0592AB21687001DA60D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A317E0582AB21687001DA60D /* ViewController.swift */; };
 		A317E05C2AB21687001DA60D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A317E05A2AB21687001DA60D /* Main.storyboard */; };
 		A317E05E2AB21689001DA60D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A317E05D2AB21689001DA60D /* Assets.xcassets */; };
 		A317E0612AB21689001DA60D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A317E05F2AB21689001DA60D /* LaunchScreen.storyboard */; };
+		A317E06A2AB21733001DA60D /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A317E0692AB21733001DA60D /* WelcomeViewController.swift */; };
+		A317E06C2AB21751001DA60D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A317E06B2AB21751001DA60D /* GameViewController.swift */; };
+		A317E06E2AB21761001DA60D /* WinLoseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A317E06D2AB21761001DA60D /* WinLoseViewController.swift */; };
+		A317E0702AB217A3001DA60D /* IngridDarling-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A317E06F2AB217A3001DA60D /* IngridDarling-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A317E0512AB21687001DA60D /* Tic-Tac-Toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic-Tac-Toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A317E0542AB21687001DA60D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A317E0562AB21687001DA60D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A317E0582AB21687001DA60D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A317E05B2AB21687001DA60D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A317E05D2AB21689001DA60D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A317E0602AB21689001DA60D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A317E0622AB21689001DA60D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A317E0692AB21733001DA60D /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A317E06B2AB21751001DA60D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A317E06D2AB21761001DA60D /* WinLoseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinLoseViewController.swift; sourceTree = "<group>"; };
+		A317E06F2AB217A3001DA60D /* IngridDarling-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "IngridDarling-Regular.ttf"; path = "../../../Downloads/IngridDarling-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,7 @@
 		A317E0482AB21687001DA60D = {
 			isa = PBXGroup;
 			children = (
+				A317E06F2AB217A3001DA60D /* IngridDarling-Regular.ttf */,
 				A317E0532AB21687001DA60D /* Tic-Tac-Toe */,
 				A317E0522AB21687001DA60D /* Products */,
 			);
@@ -56,15 +63,25 @@
 		A317E0532AB21687001DA60D /* Tic-Tac-Toe */ = {
 			isa = PBXGroup;
 			children = (
+				A317E0682AB2171B001DA60D /* Controllers */,
 				A317E0542AB21687001DA60D /* AppDelegate.swift */,
 				A317E0562AB21687001DA60D /* SceneDelegate.swift */,
-				A317E0582AB21687001DA60D /* ViewController.swift */,
 				A317E05A2AB21687001DA60D /* Main.storyboard */,
 				A317E05D2AB21689001DA60D /* Assets.xcassets */,
 				A317E05F2AB21689001DA60D /* LaunchScreen.storyboard */,
 				A317E0622AB21689001DA60D /* Info.plist */,
 			);
 			path = "Tic-Tac-Toe";
+			sourceTree = "<group>";
+		};
+		A317E0682AB2171B001DA60D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A317E0692AB21733001DA60D /* WelcomeViewController.swift */,
+				A317E06B2AB21751001DA60D /* GameViewController.swift */,
+				A317E06D2AB21761001DA60D /* WinLoseViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +144,7 @@
 			files = (
 				A317E0612AB21689001DA60D /* LaunchScreen.storyboard in Resources */,
 				A317E05E2AB21689001DA60D /* Assets.xcassets in Resources */,
+				A317E0702AB217A3001DA60D /* IngridDarling-Regular.ttf in Resources */,
 				A317E05C2AB21687001DA60D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,7 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A317E0592AB21687001DA60D /* ViewController.swift in Sources */,
+				A317E06C2AB21751001DA60D /* GameViewController.swift in Sources */,
+				A317E06A2AB21733001DA60D /* WelcomeViewController.swift in Sources */,
+				A317E06E2AB21761001DA60D /* WinLoseViewController.swift in Sources */,
 				A317E0552AB21687001DA60D /* AppDelegate.swift in Sources */,
 				A317E0572AB21687001DA60D /* SceneDelegate.swift in Sources */,
 			);
