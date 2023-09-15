@@ -1,19 +1,15 @@
 //
-//  GameViewController.swift
+//  SplashScreenViewController.swift
 //  Tic-Tac-Toe
 //
-//  Created by Nilufar Bakhridinova on 2023-09-13.
+//  Created by Nilufar Bakhridinova on 2023-09-15.
 //
 
 import UIKit
 
-class GameViewController: UIViewController {
-    
-    @IBOutlet weak var lblO: UILabel!
-    @IBOutlet weak var lblX: UILabel!
-    @IBOutlet weak var lblPlayer1: UILabel!
-    @IBOutlet weak var lblPlayer2: UILabel!
-    
+class SplashScreenViewController: UIViewController {
+
+    @IBOutlet weak var drawingImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
