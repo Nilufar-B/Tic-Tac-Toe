@@ -9,21 +9,31 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
 
+    @IBOutlet weak var btnPlayWithFriend: UIImageView!
+    @IBOutlet weak var btnPlayWithAI: UIImageView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func onTapPlayWithAI(_ sender: UITapGestureRecognizer) {
+        btnPlayWithAI.isHighlighted = true
+        btnPlayWithFriend.isHighlighted = false
+        
     }
-    */
-
+    
+    
+    @IBAction func onTapPlayWithFriend(_ sender: UITapGestureRecognizer) {
+        btnPlayWithAI.isHighlighted = false
+        btnPlayWithFriend.isHighlighted = true
+    }
+    
+    @IBAction func onPlay(_ sender: UITapGestureRecognizer) {
+        
+        
+    }
+    
 }
