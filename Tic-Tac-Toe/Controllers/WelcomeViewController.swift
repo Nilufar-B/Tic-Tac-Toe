@@ -12,13 +12,14 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var btnPlayWithFriend: UIImageView!
     @IBOutlet weak var btnPlayWithAI: UIImageView!
     
-    
+    //var gameMode = GameMode.single
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
+    //make sure that i use those highlighted setup's in setupGame function
     @IBAction func onTapPlayWithAI(_ sender: UITapGestureRecognizer) {
         btnPlayWithAI.isHighlighted = true
         btnPlayWithFriend.isHighlighted = false
@@ -35,5 +36,9 @@ class WelcomeViewController: UIViewController {
         
         
     }
+    
+   // func setupGame(gameMode: GameMode, player1Name: String, player2Name: String){
+        //use switch to choose the gameMode
+   // }
     
 }
