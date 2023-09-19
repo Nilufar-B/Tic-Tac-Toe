@@ -27,21 +27,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic-tac-Toe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btB-TE-46d">
-                                <rect key="frame" x="59.333333333333343" y="286" width="274.33333333333326" height="111.66666666666669"/>
-                                <fontDescription key="fontDescription" name="IngridDarling-Regular" family="Ingrid Darling" pointSize="90"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic-Tac-Toe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btB-TE-46d">
+                                <rect key="frame" x="36" y="286" width="321" height="60.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnPlay" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-ix-ckB">
-                                <rect key="frame" x="132" y="696" width="129" height="73"/>
+                                <rect key="frame" x="132" y="725" width="129" height="73"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="bvs-I6-LZ8" appends="YES" id="EeP-rM-EB6"/>
                                 </connections>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="BlL-8w-Aye">
-                                <rect key="frame" x="121.66666666666669" y="528.66666666666663" width="150" height="100"/>
+                                <rect key="frame" x="121.66666666666669" y="465.33333333333326" width="150" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="114" translatesAutoresizingMaskIntoConstraints="NO" id="cQl-x1-SSQ">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
@@ -74,26 +74,68 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your play mode:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZE-wR-GyI">
-                                <rect key="frame" x="121" y="485" width="190" height="35"/>
-                                <fontDescription key="fontDescription" name="IngridDarling-Regular" family="Ingrid Darling" pointSize="28"/>
+                                <rect key="frame" x="110" y="416.66666666666669" width="201" height="40"/>
+                                <fontDescription key="fontDescription" name="IngridDarling-Regular" family="Ingrid Darling" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="f8m-8i-d4L">
+                                <rect key="frame" x="96.666666666666686" y="601" width="200" height="74"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hEW-Wn-bm7">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player_1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OsX-EQ-gw3">
+                                                <rect key="frame" x="0.0" y="0.0" width="82.333333333333329" height="34"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Enter_name" adjustsFontSizeToFit="NO" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="K54-t2-iPQ">
+                                                <rect key="frame" x="90.333333333333314" y="0.0" width="109.66666666666669" height="34"/>
+                                                <attributedString key="attributedText"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="QSi-r3-QLO">
+                                        <rect key="frame" x="0.0" y="40" width="200" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player_2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaU-13-lwy">
+                                                <rect key="frame" x="0.0" y="0.0" width="81.666666666666671" height="34"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Enter_name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMN-r3-eMP">
+                                                <rect key="frame" x="90.666666666666686" y="0.0" width="109.33333333333331" height="34"/>
+                                                <attributedString key="attributedText"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="1mK-r1-8qJ"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b2H-lc-tY5"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
-                            <constraint firstItem="uZE-wR-GyI" firstAttribute="top" secondItem="btB-TE-46d" secondAttribute="bottom" constant="87.333333333333314" id="3s4-i7-sdu"/>
+                            <constraint firstItem="uZE-wR-GyI" firstAttribute="top" secondItem="btB-TE-46d" secondAttribute="bottom" constant="70" id="3s4-i7-sdu"/>
                             <constraint firstItem="9aP-eL-NWh" firstAttribute="top" secondItem="b2H-lc-tY5" secondAttribute="top" constant="70" id="CVy-3V-pi4"/>
+                            <constraint firstItem="Lcp-ix-ckB" firstAttribute="top" secondItem="f8m-8i-d4L" secondAttribute="bottom" constant="50" id="ObR-rx-U4x"/>
                             <constraint firstItem="BlL-8w-Aye" firstAttribute="top" secondItem="uZE-wR-GyI" secondAttribute="bottom" constant="8.6666666666666288" id="R6y-sW-zmK"/>
                             <constraint firstItem="BlL-8w-Aye" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="SPH-D5-hRF"/>
+                            <constraint firstItem="f8m-8i-d4L" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="UPp-VQ-L3x"/>
                             <constraint firstItem="9aP-eL-NWh" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="adg-YQ-j7H"/>
-                            <constraint firstItem="uZE-wR-GyI" firstAttribute="leading" secondItem="b2H-lc-tY5" secondAttribute="leading" constant="121" id="c4W-F4-emd"/>
+                            <constraint firstItem="uZE-wR-GyI" firstAttribute="leading" secondItem="b2H-lc-tY5" secondAttribute="leading" constant="110" id="c4W-F4-emd"/>
                             <constraint firstItem="b2H-lc-tY5" firstAttribute="trailing" secondItem="uZE-wR-GyI" secondAttribute="trailing" constant="82" id="fXm-8u-78l"/>
                             <constraint firstItem="Lcp-ix-ckB" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="lYA-GU-SRX"/>
                             <constraint firstItem="btB-TE-46d" firstAttribute="top" secondItem="9aP-eL-NWh" secondAttribute="bottom" constant="70" id="ld4-mM-Aom"/>
                             <constraint firstItem="btB-TE-46d" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="x0u-J7-Kz8"/>
-                            <constraint firstItem="b2H-lc-tY5" firstAttribute="bottom" secondItem="Lcp-ix-ckB" secondAttribute="bottom" constant="49" id="yGw-XX-dDf"/>
+                            <constraint firstItem="b2H-lc-tY5" firstAttribute="bottom" secondItem="Lcp-ix-ckB" secondAttribute="bottom" constant="20" id="yGw-XX-dDf"/>
                             <constraint firstItem="Lcp-ix-ckB" firstAttribute="leading" secondItem="b2H-lc-tY5" secondAttribute="leading" constant="132" id="zNB-vj-Nfd"/>
                         </constraints>
                     </view>
@@ -101,13 +143,16 @@
                     <connections>
                         <outlet property="btnPlayWithAI" destination="Bne-T6-5PF" id="Grn-U8-a7P"/>
                         <outlet property="btnPlayWithFriend" destination="y0G-Wq-95I" id="MDf-0l-yvH"/>
+                        <outlet property="stackViewPlayersName" destination="f8m-8i-d4L" id="6W4-ez-4qU"/>
+                        <outlet property="txtPlayer1Name" destination="K54-t2-iPQ" id="T5B-ft-V8e"/>
+                        <outlet property="txtPlayer2Name" destination="mMN-r3-eMP" id="3f5-vB-AeL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8g2-8a-0Uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bvs-I6-LZ8" userLabel="TapPlaybutton">
                     <connections>
                         <action selector="onPlay:" destination="KHT-TW-mJl" id="Gf2-zr-u8Q"/>
-                        <segue destination="4Ww-eV-6Ej" kind="show" id="S6X-Dm-Hr8"/>
+                        <segue destination="4Ww-eV-6Ej" kind="show" identifier="toGame" id="S6X-Dm-Hr8"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="2kq-xn-QdA" userLabel="TapPlayWithAI">
@@ -143,7 +188,7 @@
                                 </connections>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DvS-un-6rT">
-                                <rect key="frame" x="36" y="213" width="321" height="320"/>
+                                <rect key="frame" x="36" y="214.66666666666663" width="321" height="320"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kXK-Kq-DJf">
                                         <rect key="frame" x="0.0" y="0.0" width="321" height="100"/>
@@ -172,7 +217,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="teb-p7-jOA">
-                                        <rect key="frame" x="0.0" y="110" width="321" height="100"/>
+                                        <rect key="frame" x="0.0" y="110.00000000000003" width="321" height="100"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" tag="3" contentMode="scaleAspectFit" verticalHuggingPriority="251" image="cell" translatesAutoresizingMaskIntoConstraints="NO" id="aFw-xs-vC2">
                                                 <rect key="frame" x="0.0" y="0.0" width="101" height="100"/>
@@ -227,34 +272,34 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="ksA-3O-jok">
-                                <rect key="frame" x="276" y="50" width="67" height="108"/>
+                                <rect key="frame" x="253.66666666666666" y="50.000000000000007" width="89.333333333333343" height="109.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYG-yN-JOB">
-                                        <rect key="frame" x="18.333333333333314" y="0.0" width="30.333333333333329" height="62.666666666666664"/>
+                                        <rect key="frame" x="29.666666666666657" y="0.0" width="30.333333333333329" height="62.666666666666664"/>
                                         <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="48"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0W-xO-mru">
-                                        <rect key="frame" x="0.0" y="81.666666666666657" width="67" height="26.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <rect key="frame" x="0.0" y="81.666666666666657" width="89.333333333333329" height="28"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-9a-5tP">
-                                <rect key="frame" x="50" y="50" width="67" height="107"/>
+                                <rect key="frame" x="49.999999999999993" y="50.000000000000007" width="89.333333333333314" height="108.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5O-P9-pWM">
-                                        <rect key="frame" x="17.333333333333332" y="0.0" width="32.333333333333343" height="62.666666666666664"/>
+                                        <rect key="frame" x="28.666666666666675" y="0.0" width="32.333333333333343" height="62.666666666666664"/>
                                         <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="48"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2C-ut-GUG">
-                                        <rect key="frame" x="0.0" y="80.666666666666657" width="67" height="26.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <rect key="frame" x="0.0" y="80.666666666666657" width="89.333333333333329" height="28"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -284,7 +329,7 @@
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Win Win!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NqM-d0-8be">
-                                <rect key="frame" x="93.333333333333329" y="563" width="206.66666666666669" height="84.333333333333371"/>
+                                <rect key="frame" x="93.333333333333329" y="564.66666666666663" width="206.66666666666669" height="84.333333333333371"/>
                                 <fontDescription key="fontDescription" name="IngridDarling-Regular" family="Ingrid Darling" pointSize="68"/>
                                 <color key="textColor" red="0.087155453860759735" green="0.84511089324951172" blue="0.065112672746181488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
