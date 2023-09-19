@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class WelcomeViewController: UIViewController {
 
     @IBOutlet weak var btnPlayWithFriend: UIImageView!
@@ -17,7 +18,9 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var stackViewPlayersName: UIStackView!
     
-    var mySegue = "toGame"
+    var mySegue = "goToGameController"
+    var isPlayingWithAI = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,7 @@ class WelcomeViewController: UIViewController {
     @IBAction func onTapPlayWithAI(_ sender: UITapGestureRecognizer) {
         btnPlayWithAI.isHighlighted = true
         btnPlayWithFriend.isHighlighted = false
+        isPlayingWithAI = true
         
     }
     
@@ -35,8 +39,8 @@ class WelcomeViewController: UIViewController {
     @IBAction func onTapPlayWithFriend(_ sender: UITapGestureRecognizer) {
         btnPlayWithAI.isHighlighted = false
         btnPlayWithFriend.isHighlighted = true
-        
         stackViewPlayersName.isHidden = false
+        isPlayingWithAI = false
         
     }
     
@@ -65,7 +69,6 @@ class WelcomeViewController: UIViewController {
              performSegue(withIdentifier: mySegue, sender: nil)
             }
         }
-
         
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)

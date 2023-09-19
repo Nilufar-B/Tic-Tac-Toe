@@ -13,20 +13,17 @@ class GameViewController: UIViewController {
     @IBOutlet weak var lblX: UILabel!
     @IBOutlet weak var lblPlayer1: UILabel!
     @IBOutlet weak var lblPlayer2: UILabel!
-    
     @IBOutlet weak var lblInfoWinLoseDraw: UILabel!
-    
     @IBOutlet weak var btnReser: UIImageView!
-    
-   
+    @IBOutlet weak var imgBtnOnPlayAgain: UIImageView!
     @IBOutlet var imgCell: [UIImageView]!
     
-
-    var gameIsActive = false
     var currentPlayer = 1
-  
-    var player1Name = "Cross"
-    var player2Name = "Nought"
+    var gameIsActive = true
+    var player1Name = ""
+    var player2Name = ""
+    var player1Score = 0
+    var player2Score = 0
  
     
     var imageCross = UIImage(named: "cross")
@@ -48,91 +45,95 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updatePlayersLabels()
         resetGame()
 
     }
     
     @IBAction func onCellTap(_ sender: UITapGestureRecognizer) {
         
-        guard gameIsActive, let tappedCell = sender.view as? UIImageView else { return }
-        
-  
-
-            if gameIsActive {
+        guard let tappedCell = sender.view as? UIImageView else { return }
+            
+            if tappedCell.image == imageCell && gameIsActive { // Проверьте, что клетка пуста и игра активна
                 // Make the move for the current player
-                if currentPlayer == 1 {
-                    tappedCell.image = imageCross
-                } else {
-                    tappedCell.image = imageNought
-                }
-
-                // Check for a winner
+                tappedCell.image = (currentPlayer == 1) ? imageCross : imageNought
+                
                 if checkForWinner() {
                     let winner = (currentPlayer == 1) ? player1Name : player2Name
-                    lblInfoWinLoseDraw.isHidden = false
-                    lblInfoWinLoseDraw.text = "\(winner) wins!"
-                    gameIsActive = false
+                    showResult(message: "\(winner) wins!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    updateScore()
+                    gameIsActive = false // Завершите игру после победы
+                } else if isGameDraw() {
+                    showResult(message: "It's a draw!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    gameIsActive = false // Завершите игру в случае ничьей
                 } else {
-                    // If there is no winner, check for a draw
-                    if isGameDraw() {
-                        lblInfoWinLoseDraw.isHidden = false
-                        lblInfoWinLoseDraw.text = "It's a draw!"
-                        gameIsActive = false
-                    } else {
-                        // Switch to the next player's turn
-                        currentPlayer = (currentPlayer == 1) ? 2 : 1
-                    }
+                    currentPlayer = (currentPlayer == 1) ? 2 : 1
+                    updatePlayersLabels()
                 }
             }
+                
     }
 
     func isGameDraw() -> Bool {
-        for cell in imgCell {
-            if cell.image == imageCell {
-                return false
-            }
+            return imgCell.allSatisfy { $0.image != imageCell }
         }
-        return true
-    }
-    
-    func checkForWinner() -> Bool {
-        
-        for combination in combinationOfWin {
-            let cell1 = imgCell[combination[0]]
-            let cell2 = imgCell[combination[1]]
-            let cell3 = imgCell[combination[2]]
-            
-            if cell1.image != imageCell && cell1.image == cell2.image && cell2.image == cell3.image {
-              
-                return true
+
+        func checkForWinner() -> Bool {
+            for combination in combinationOfWin {
+                let (a, b, c) = (imgCell[combination[0]], imgCell[combination[1]], imgCell[combination[2]])
+                if a.image != imageCell, a.image == b.image, b.image == c.image {
+                    return true
+                }
             }
-            
+            return false
         }
-        return false
-    }
-    
     @IBAction func onReset(_ sender: UITapGestureRecognizer) {
+       
+    }
+    
+    @IBAction func onPlayAgain(_ sender: UITapGestureRecognizer) {
         resetGame()
     }
     
-    func resetGame(){
-        lblPlayer1.text = "PlayerX"
-        lblPlayer2.text = "PlayerO"
-        gameIsActive = true
-        lblInfoWinLoseDraw.isHidden = true
-        currentPlayer = 1
-        
-        //Resetting images in cells
-        for cell in imgCell {
-            cell.image = imageCell
+    func resetGame() {
+            gameIsActive = true
+            lblInfoWinLoseDraw.isHidden = true
+        imgBtnOnPlayAgain.isHidden = true
+            currentPlayer = 1
+            imgCell.forEach { $0.image = imageCell }
+            updateUI()
         }
-    }
-    
-    func updatePlayersLabels(){
-        
-        
-    }
-    
 
+        func updateUI() {
+            updatePlayersLabels()
+            updateScoreLabels()
+        }
 
+        func updatePlayersLabels() {
+            lblPlayer1.text = player1Name
+            lblPlayer2.text = player2Name
+        }
+
+        func updateScoreLabels() {
+            lblX.text = String(player1Score)
+            lblO.text = String(player2Score)
+        }
+    
+      func updateScore() {
+            if currentPlayer == 1 {
+                player1Score += 1
+            } else {
+                player2Score += 1
+            }
+            updateScoreLabels()
+        }
+
+        func showResult(message: String) {
+            lblInfoWinLoseDraw.isHidden = false
+            lblInfoWinLoseDraw.text = message
+            gameIsActive = false
+        }
+    
 }
