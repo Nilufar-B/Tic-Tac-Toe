@@ -14,16 +14,24 @@ class GameViewController: UIViewController {
     @IBOutlet weak var lblPlayer1: UILabel!
     @IBOutlet weak var lblPlayer2: UILabel!
     @IBOutlet weak var lblInfoWinLoseDraw: UILabel!
-    @IBOutlet weak var btnReser: UIImageView!
     @IBOutlet weak var imgBtnOnPlayAgain: UIImageView!
     @IBOutlet var imgCell: [UIImageView]!
     
     var currentPlayer = 1
     var gameIsActive = true
+    
     var player1Name = ""
     var player2Name = ""
+    
+    let activePlayerColor = UIColor.yellow
+    let inactivePlayerColor = UIColor.white
+
     var player1Score = 0
     var player2Score = 0
+    
+    var segueExit = "toWelcomeController"
+    
+    
  
     
     var imageCross = UIImage(named: "cross")
@@ -44,8 +52,9 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         updatePlayersLabels()
+        updatePlayerLabelColors()
         resetGame()
 
     }
@@ -54,7 +63,7 @@ class GameViewController: UIViewController {
         
         guard let tappedCell = sender.view as? UIImageView else { return }
             
-            if tappedCell.image == imageCell && gameIsActive { // Проверьте, что клетка пуста и игра активна
+            if tappedCell.image == imageCell && gameIsActive { // Check if cell is empty and game is active
                 // Make the move for the current player
                 tappedCell.image = (currentPlayer == 1) ? imageCross : imageNought
                 
@@ -63,18 +72,28 @@ class GameViewController: UIViewController {
                     showResult(message: "\(winner) wins!")
                     imgBtnOnPlayAgain.isHidden = false
                     updateScore()
-                    gameIsActive = false // Завершите игру после победы
+                    gameIsActive = false // continue the game after win
                 } else if isGameDraw() {
                     showResult(message: "It's a draw!")
                     imgBtnOnPlayAgain.isHidden = false
-                    gameIsActive = false // Завершите игру в случае ничьей
+                    gameIsActive = false // continue the game if it's draw
                 } else {
                     currentPlayer = (currentPlayer == 1) ? 2 : 1
-                    updatePlayersLabels()
+                   // updatePlayersLabels()
+                    updatePlayerLabelColors()
                 }
             }
                 
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueExit,
+           let _ = segue.destination as? WelcomeViewController {
+       
+            
+        }
+    }
+
 
     func isGameDraw() -> Bool {
             return imgCell.allSatisfy { $0.image != imageCell }
@@ -89,21 +108,37 @@ class GameViewController: UIViewController {
             }
             return false
         }
-    @IBAction func onReset(_ sender: UITapGestureRecognizer) {
-       
-    }
     
     @IBAction func onPlayAgain(_ sender: UITapGestureRecognizer) {
         resetGame()
     }
     
+    @IBAction func onExitGame(_ sender: UITapGestureRecognizer) {
+        //print("Exit")
+        
+        let alert = UIAlertController(title: "Wait!", message: "Are you sure you want to leave the game?", preferredStyle: .alert)
+        
+        let actionYes = UIAlertAction(title: "Yes.", style: .default) { [self] _ in
+            // go to WelcomeViewController
+            performSegue(withIdentifier: self.segueExit, sender: nil)
+        }
+        
+        let actionNo = UIAlertAction(title: "No.", style: .cancel, handler: nil)
+        
+        alert.addAction(actionYes)
+        alert.addAction(actionNo)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
     func resetGame() {
             gameIsActive = true
             lblInfoWinLoseDraw.isHidden = true
-        imgBtnOnPlayAgain.isHidden = true
+            imgBtnOnPlayAgain.isHidden = true
             currentPlayer = 1
             imgCell.forEach { $0.image = imageCell }
             updateUI()
+            resetPlayerLabeleColors()
         }
 
         func updateUI() {
@@ -111,15 +146,31 @@ class GameViewController: UIViewController {
             updateScoreLabels()
         }
 
-        func updatePlayersLabels() {
-            lblPlayer1.text = player1Name
-            lblPlayer2.text = player2Name
-        }
+    func updatePlayersLabels() {
+        lblPlayer1.text = player1Name
+        lblPlayer2.text = player2Name
+    }
+
 
         func updateScoreLabels() {
             lblX.text = String(player1Score)
             lblO.text = String(player2Score)
         }
+    
+    func updatePlayerLabelColors() {
+        lblPlayer1.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+        lblX.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+        lblPlayer2.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+        lblO.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+    }
+    
+    func resetPlayerLabeleColors(){
+        lblPlayer1.textColor = UIColor.white
+        lblX.textColor = UIColor.white
+        lblPlayer2.textColor = UIColor.white
+        lblO.textColor = UIColor.white
+    }
+
     
       func updateScore() {
             if currentPlayer == 1 {

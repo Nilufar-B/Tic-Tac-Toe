@@ -316,7 +316,7 @@
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="zik-Op-lDR" appends="YES" id="Es4-yP-8Cb"/>
+                                    <outletCollection property="gestureRecognizers" destination="6ed-Qg-Qut" appends="YES" id="nSq-8U-Fqk"/>
                                 </connections>
                             </imageView>
                         </subviews>
@@ -354,6 +354,7 @@
                         <outletCollection property="imgCell" destination="qv8-22-Ybl" collectionClass="NSMutableArray" id="t26-up-Uuo"/>
                         <outletCollection property="imgCell" destination="tZZ-cJ-8hd" collectionClass="NSMutableArray" id="wda-bR-qBC"/>
                         <outletCollection property="imgCell" destination="nDw-wY-u5f" collectionClass="NSMutableArray" id="Kav-bK-R8R"/>
+                        <segue destination="KHT-TW-mJl" kind="show" identifier="toWelcomeController" id="G4K-ny-vui"/>
                     </connections>
                 </viewController>
                 <tapGestureRecognizer id="4xZ-Lb-ddV" userLabel="TapOnCell3">
@@ -402,20 +403,15 @@
                         <action selector="onCellTap:" destination="4Ww-eV-6Ej" id="Fbn-tT-PFs"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="vwB-uU-lHE" userLabel="TapResetButton">
-                    <connections>
-                        <action selector="onReset:" destination="4Ww-eV-6Ej" id="eaz-gy-k9a"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="vwB-uU-lHE" userLabel="TapResetButton"/>
                 <tapGestureRecognizer id="8YN-5W-5U4" userLabel="TapPlayAgain">
                     <connections>
                         <action selector="onPlayAgain:" destination="4Ww-eV-6Ej" id="vHI-ob-p81"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="zik-Op-lDR" userLabel="TapExitGame">
+                <tapGestureRecognizer id="6ed-Qg-Qut" userLabel="TapOnExit">
                     <connections>
-                        <action selector="onExitGame:" destination="4Ww-eV-6Ej" id="xHL-23-mE8"/>
-                        <segue destination="KHT-TW-mJl" kind="show" id="DWL-M8-z3t"/>
+                        <action selector="onExitGame:" destination="4Ww-eV-6Ej" id="NVe-ll-HY6"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -18,7 +18,7 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var stackViewPlayersName: UIStackView!
     
-    var mySegue = "goToGameController"
+    var segueToGame = "goToGameController"
     var isPlayingWithAI = false
 
     
@@ -45,9 +45,9 @@ class WelcomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == mySegue,
+        if segue.identifier == segueToGame,
            let gameVC = segue.destination as? GameViewController {
-            // Передайте имена игроков в GameViewController
+            // Pass player names to GameViewController
             if btnPlayWithFriend.isHighlighted {
                 gameVC.player1Name = txtPlayer1Name.text ?? "Cross"
                 gameVC.player2Name = txtPlayer2Name.text ?? "Nought"
@@ -56,22 +56,39 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func onPlay(_ sender: UITapGestureRecognizer) {
-      
-            // Check if the "Play with Friend" button is selected
             if btnPlayWithFriend.isHighlighted {
-                // Ensure both player names are entered
+                // Play with a friend option is selected
                 guard let player1Name = txtPlayer1Name.text, !player1Name.isEmpty,
                       let player2Name = txtPlayer2Name.text, !player2Name.isEmpty else {
                     
-                    showAlert(message: "Please enter name for both players.")
+                    showAlert(message: "Please enter names for both players.")
                     return
                 }
-             performSegue(withIdentifier: mySegue, sender: nil)
+                performSegue(withIdentifier: segueToGame, sender: nil)
+            } else if btnPlayWithAI.isHighlighted {
+                // Play with AI option is selected
+                performSegue(withIdentifier: segueToGame, sender: nil)
+            } else {
+                showAlert(message: "Please select a game option.")
             }
+        
+
+      
+//            // Check if the "Play with Friend" button is selected
+//            if btnPlayWithFriend.isHighlighted {
+//                // Ensure both player names are entered
+//                guard let player1Name = txtPlayer1Name.text, !player1Name.isEmpty,
+//                      let player2Name = txtPlayer2Name.text, !player2Name.isEmpty else {
+//
+//                    showAlert(message: "Please enter name for both players.")
+//                    return
+//                }
+//             performSegue(withIdentifier: segueToGame, sender: nil)
+//            }
         }
         
     func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Warning!!!", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
