@@ -15,6 +15,7 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var txtPlayer1Name: UITextField!
     @IBOutlet weak var txtPlayer2Name: UITextField!
+    @IBOutlet weak var txtPlayerWithAIName: UITextField!
     
     @IBOutlet weak var stackViewPlayersName: UIStackView!
     
@@ -30,7 +31,9 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func onTapPlayWithAI(_ sender: UITapGestureRecognizer) {
         btnPlayWithAI.isHighlighted = true
+        txtPlayerWithAIName.isHidden = false
         btnPlayWithFriend.isHighlighted = false
+        stackViewPlayersName.isHidden = true
         isPlayingWithAI = true
         
     }
@@ -40,51 +43,50 @@ class WelcomeViewController: UIViewController {
         btnPlayWithAI.isHighlighted = false
         btnPlayWithFriend.isHighlighted = true
         stackViewPlayersName.isHidden = false
+        txtPlayerWithAIName.isHidden = true
         isPlayingWithAI = false
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueToGame,
-           let gameVC = segue.destination as? GameViewController {
-            // Pass player names to GameViewController
-            if btnPlayWithFriend.isHighlighted {
-                gameVC.player1Name = txtPlayer1Name.text ?? "Cross"
-                gameVC.player2Name = txtPlayer2Name.text ?? "Nought"
+            if segue.identifier == segueToGame,
+               let gameVC = segue.destination as? GameViewController {
+                if isPlayingWithAI {
+                    gameVC.gameMode = .PlayerVsAI
+                    gameVC.playerWithAIName = txtPlayerWithAIName.text ?? "Cross"
+                    gameVC.playerAI = "AI"
+                } else {
+                    gameVC.gameMode = .PlayerVsPlayer
+                    gameVC.player1Name = txtPlayer1Name.text ?? "Cross"
+                    gameVC.player2Name = txtPlayer2Name.text ?? "Nought"
+                }
             }
         }
-    }
+
     
     @IBAction func onPlay(_ sender: UITapGestureRecognizer) {
+            
             if btnPlayWithFriend.isHighlighted {
                 // Play with a friend option is selected
                 guard let player1Name = txtPlayer1Name.text, !player1Name.isEmpty,
                       let player2Name = txtPlayer2Name.text, !player2Name.isEmpty else {
-                    
+
                     showAlert(message: "Please enter names for both players.")
                     return
                 }
                 performSegue(withIdentifier: segueToGame, sender: nil)
             } else if btnPlayWithAI.isHighlighted {
                 // Play with AI option is selected
+                guard let playerWithAIName = txtPlayerWithAIName.text, !playerWithAIName.isEmpty else {
+
+                    showAlert(message: "Please enter your name.")
+                    return
+                }
                 performSegue(withIdentifier: segueToGame, sender: nil)
             } else {
                 showAlert(message: "Please select a game option.")
             }
-        
 
-      
-//            // Check if the "Play with Friend" button is selected
-//            if btnPlayWithFriend.isHighlighted {
-//                // Ensure both player names are entered
-//                guard let player1Name = txtPlayer1Name.text, !player1Name.isEmpty,
-//                      let player2Name = txtPlayer2Name.text, !player2Name.isEmpty else {
-//
-//                    showAlert(message: "Please enter name for both players.")
-//                    return
-//                }
-//             performSegue(withIdentifier: segueToGame, sender: nil)
-//            }
         }
         
     func showAlert(message: String) {

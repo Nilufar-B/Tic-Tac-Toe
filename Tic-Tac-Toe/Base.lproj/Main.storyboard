@@ -119,6 +119,11 @@
                                     <constraint firstAttribute="width" constant="200" id="1mK-r1-8qJ"/>
                                 </constraints>
                             </stackView>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Enter your name..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sxa-0k-BA7">
+                                <rect key="frame" x="111.66666666666667" y="514" width="166.66666666666663" height="34"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b2H-lc-tY5"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
@@ -134,6 +139,8 @@
                             <constraint firstItem="b2H-lc-tY5" firstAttribute="trailing" secondItem="uZE-wR-GyI" secondAttribute="trailing" constant="82" id="fXm-8u-78l"/>
                             <constraint firstItem="Lcp-ix-ckB" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="lYA-GU-SRX"/>
                             <constraint firstItem="btB-TE-46d" firstAttribute="top" secondItem="9aP-eL-NWh" secondAttribute="bottom" constant="70" id="ld4-mM-Aom"/>
+                            <constraint firstItem="sxa-0k-BA7" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="oLK-AD-teI"/>
+                            <constraint firstItem="sxa-0k-BA7" firstAttribute="top" secondItem="BlL-8w-Aye" secondAttribute="bottom" constant="7.6666666666666856" id="u76-5Z-h8z"/>
                             <constraint firstItem="btB-TE-46d" firstAttribute="centerX" secondItem="Phb-tv-1y5" secondAttribute="centerX" id="x0u-J7-Kz8"/>
                             <constraint firstItem="b2H-lc-tY5" firstAttribute="bottom" secondItem="Lcp-ix-ckB" secondAttribute="bottom" constant="20" id="yGw-XX-dDf"/>
                             <constraint firstItem="Lcp-ix-ckB" firstAttribute="leading" secondItem="b2H-lc-tY5" secondAttribute="leading" constant="132" id="zNB-vj-Nfd"/>
@@ -146,6 +153,7 @@
                         <outlet property="stackViewPlayersName" destination="f8m-8i-d4L" id="6W4-ez-4qU"/>
                         <outlet property="txtPlayer1Name" destination="K54-t2-iPQ" id="T5B-ft-V8e"/>
                         <outlet property="txtPlayer2Name" destination="mMN-r3-eMP" id="3f5-vB-AeL"/>
+                        <outlet property="txtPlayerWithAIName" destination="sxa-0k-BA7" id="jmR-87-jre"/>
                         <segue destination="4Ww-eV-6Ej" kind="show" identifier="goToGameController" id="LOH-OZ-bl7"/>
                     </connections>
                 </viewController>
@@ -166,7 +174,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-234.35114503816794" y="12.67605633802817"/>
+            <point key="canvasLocation" x="-235.38461538461539" y="12.085308056872037"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="Lbf-RM-MeH">

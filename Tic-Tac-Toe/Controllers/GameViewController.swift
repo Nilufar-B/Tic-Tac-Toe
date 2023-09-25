@@ -9,6 +9,8 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    var gameMode: GameMode = .PlayerVsAI
+    
     @IBOutlet weak var lblO: UILabel!
     @IBOutlet weak var lblX: UILabel!
     @IBOutlet weak var lblPlayer1: UILabel!
@@ -24,6 +26,8 @@ class GameViewController: UIViewController {
         
         var player1Name = ""
         var player2Name = ""
+        var playerWithAIName = ""
+        var playerAI = ""
         
         let activePlayerColor = UIColor.yellow
         let inactivePlayerColor = UIColor.white
@@ -56,36 +60,50 @@ class GameViewController: UIViewController {
         
     
     @IBAction func onCellTap(_ sender: UITapGestureRecognizer) {
-        
-        guard let tappedCell = sender.view as? UIImageView else { return }
-                    
-                    if tappedCell.image == imageCell && gameIsActive { // Check if cell is empty and game is active
-                        // Make the move for the current player
-                        tappedCell.image = (currentPlayer == 1) ? imageCross : imageNought
+            guard let tappedCell = sender.view as? UIImageView else { return }
+
+            if tappedCell.image == imageCell && gameIsActive { // Проверьте, что ячейка пуста и игра активна
+                // Сделать ход для текущего игрока
+                tappedCell.image = (currentPlayer == 1) ? imageCross : imageNought
+
+                if checkForWinner() {
+                    let winner = (currentPlayer == 1) ? player1Name : player2Name
+                    showResult(message: "\(winner) wins!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    updateScore()
+                    gameIsActive = false // Продолжить игру после победы
+                } else if isGameDraw() {
+                    showResult(message: "It's a draw!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    gameIsActive = false // Продолжить игру, если ничья
+                } else {
+                    if gameMode == .PlayerVsPlayer {
+                        currentPlayer = (currentPlayer == 1) ? 2 : 1
+                        updatePlayerLabelColors()
+                    } else if gameMode == .PlayerVsAI && currentPlayer == 1 {
+                        currentPlayer = 2
+                        updatePlayersLabels()
+                        updatePlayerLabelColors()
                         
-                        if checkForWinner() {
-                            let winner = (currentPlayer == 1) ? player1Name : player2Name
-                            showResult(message: "\(winner) wins!")
-                            imgBtnOnPlayAgain.isHidden = false
-                            updateScore()
-                            gameIsActive = false // continue the game after win
-                        } else if isGameDraw() {
-                            showResult(message: "It's a draw!")
-                            imgBtnOnPlayAgain.isHidden = false
-                            gameIsActive = false // continue the game if it's draw
-                        } else {
-                            currentPlayer = (currentPlayer == 1) ? 2 : 1
-                            updatePlayersLabels()
-                            updatePlayerLabelColors()
+                        //delay before computer move
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+                            self.makeAIMove()
                         }
                     }
-    }
+                }
+            }
+        }
+
+                        
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == segueExit,
                let _ = segue.destination as? WelcomeViewController {
             }
         }
+
+
 
 
         func isGameDraw() -> Bool {
@@ -132,6 +150,7 @@ class GameViewController: UIViewController {
                 currentPlayer = 1
                 imgCell.forEach { $0.image = imageCell }
                 updateUI()
+                updatePlayerLabelColors()
             }
 
             func updateUI() {
@@ -139,10 +158,15 @@ class GameViewController: UIViewController {
                 updateScoreLabels()
             }
 
-        func updatePlayersLabels() {
+    func updatePlayersLabels() {
+        if gameMode == .PlayerVsPlayer {
             lblPlayer1.text = player1Name
             lblPlayer2.text = player2Name
+        } else {
+            lblPlayer1.text = playerWithAIName
+            lblPlayer2.text = playerAI
         }
+    }
 
 
             func updateScoreLabels() {
@@ -150,12 +174,23 @@ class GameViewController: UIViewController {
                 lblO.text = String(player2Score)
             }
         
-        func updatePlayerLabelColors() {
-            lblPlayer1.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+    func updatePlayerLabelColors() {
+        
+        print("currentPlayer: \(currentPlayer)")
+        
+        lblPlayer1.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+        lblPlayer2.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+
+        if gameMode == .PlayerVsPlayer {
             lblX.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
-            lblPlayer2.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+            lblO.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+        } else {
+            lblX.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
             lblO.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
         }
+    }
+    
+
 
         
           func updateScore() {
@@ -172,5 +207,37 @@ class GameViewController: UIViewController {
                 lblInfoWinLoseDraw.text = message
                 gameIsActive = false
             }
-        
+    
+    func makeAIMove() {
+        if gameIsActive && gameMode == .PlayerVsAI && currentPlayer == 2 {
+            var emptyCells = [Int]()
+            for (index, cell) in imgCell.enumerated() {
+                if cell.image == imageCell {
+                    emptyCells.append(index)
+                }
+            }
+
+            if !emptyCells.isEmpty {
+                let randomIndex = Int.random(in: 0..<emptyCells.count)
+                let selectedCellIndex = emptyCells[randomIndex]
+                imgCell[selectedCellIndex].image = imageNought
+
+                if checkForWinner() {
+                    let winner = (currentPlayer == 1) ? playerWithAIName : playerAI
+                    showResult(message: "\(winner) wins!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    updateScore()
+                    gameIsActive = false
+                } else if isGameDraw() {
+                    showResult(message: "It's a draw!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    gameIsActive = false
+                } else {
+                    currentPlayer = (currentPlayer == 1) ? 2 : 1
+                    updatePlayersLabels()
+                    updatePlayerLabelColors()
+                }
+            }
+        }
     }
+}
