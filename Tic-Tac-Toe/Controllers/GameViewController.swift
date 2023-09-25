@@ -107,10 +107,12 @@ class GameViewController: UIViewController {
 
 
         func isGameDraw() -> Bool {
+            //call the method allSatisfy to check if there are any empty cells left on the board
                 return imgCell.allSatisfy { $0.image != imageCell }
             }
 
             func checkForWinner() -> Bool {
+                //a loop that checks cells for winning positions
                 for combination in combinationOfWin {
                     let (a, b, c) = (imgCell[combination[0]], imgCell[combination[1]], imgCell[combination[2]])
                     if a.image != imageCell, a.image == b.image, b.image == c.image {
@@ -170,13 +172,14 @@ class GameViewController: UIViewController {
 
 
             func updateScoreLabels() {
+                //updating player score information
                 lblX.text = String(player1Score)
                 lblO.text = String(player2Score)
             }
         
     func updatePlayerLabelColors() {
         
-        print("currentPlayer: \(currentPlayer)")
+        //print("currentPlayer: \(currentPlayer)")
         
         lblPlayer1.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
         lblPlayer2.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
@@ -225,6 +228,7 @@ class GameViewController: UIViewController {
                 if checkForWinner() {
                     let winner = (currentPlayer == 1) ? playerWithAIName : playerAI
                     showResult(message: "\(winner) wins!")
+                    print("Show: \(winner)")
                     imgBtnOnPlayAgain.isHidden = false
                     updateScore()
                     gameIsActive = false
