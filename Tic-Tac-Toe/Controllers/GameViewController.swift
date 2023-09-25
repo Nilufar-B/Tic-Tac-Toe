@@ -9,114 +9,239 @@ import UIKit
 
 class GameViewController: UIViewController {
     
+    var gameMode: GameMode = .PlayerVsAI
+    
     @IBOutlet weak var lblO: UILabel!
     @IBOutlet weak var lblX: UILabel!
     @IBOutlet weak var lblPlayer1: UILabel!
     @IBOutlet weak var lblPlayer2: UILabel!
-    
     @IBOutlet weak var lblInfoWinLoseDraw: UILabel!
-    
-    @IBOutlet weak var btnReser: UIImageView!
-    
-   
+    @IBOutlet weak var imgBtnOnPlayAgain: UIImageView!
     @IBOutlet var imgCell: [UIImageView]!
     
+    
 
-    var playerIsActive = true
-    var activePlayer = 1
-  
-    let combinationOfWin = [[0,1,2],
-                           [3,4,5],
-                           [6,7,8],
-                           [0,3,6],
-                           [1,4,7],
-                           [2,5,8],
-                           [0,4,8],
-                           [2,4,6]]
-    
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var currentPlayer = 1
+        var gameIsActive = true
         
-        resetGame()
+        var player1Name = ""
+        var player2Name = ""
+        var playerWithAIName = ""
+        var playerAI = ""
+        
+        let activePlayerColor = UIColor.yellow
+        let inactivePlayerColor = UIColor.white
 
+        var player1Score = 0
+        var player2Score = 0
+        
+        var segueExit = "toWelcomeController"
+        
+        var imageCross = UIImage(named: "cross")
+        var imageNought = UIImage(named: "nought")
+        var imageCell = UIImage(named: "cell")
+      
+        let combinationOfWin = [[0,1,2],
+                               [3,4,5],
+                               [6,7,8],
+                               [0,3,6],
+                               [1,4,7],
+                               [2,5,8],
+                               [0,4,8],
+                               [2,4,6]]
+       
+        override func viewDidLoad() {
+            super.viewDidLoad()
+        
+            updatePlayersLabels()
+            updatePlayerLabelColors()
+            resetGame()
+        }
+        
+    
+    @IBAction func onCellTap(_ sender: UITapGestureRecognizer) {
+            guard let tappedCell = sender.view as? UIImageView else { return }
+
+            if tappedCell.image == imageCell && gameIsActive { // Проверьте, что ячейка пуста и игра активна
+                // Сделать ход для текущего игрока
+                tappedCell.image = (currentPlayer == 1) ? imageCross : imageNought
+
+                if checkForWinner() {
+                    let winner = (currentPlayer == 1) ? player1Name : player2Name
+                    showResult(message: "\(winner) wins!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    updateScore()
+                    gameIsActive = false // Продолжить игру после победы
+                } else if isGameDraw() {
+                    showResult(message: "It's a draw!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    gameIsActive = false // Продолжить игру, если ничья
+                } else {
+                    if gameMode == .PlayerVsPlayer {
+                        currentPlayer = (currentPlayer == 1) ? 2 : 1
+                        updatePlayerLabelColors()
+                    } else if gameMode == .PlayerVsAI && currentPlayer == 1 {
+                        currentPlayer = 2
+                        updatePlayersLabels()
+                        updatePlayerLabelColors()
+                        
+                        //delay before computer move
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+                            self.makeAIMove()
+                        }
+                    }
+                }
+            }
+        }
+
+                        
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == segueExit,
+               let _ = segue.destination as? WelcomeViewController {
+            }
+        }
+
+
+
+
+        func isGameDraw() -> Bool {
+            //call the method allSatisfy to check if there are any empty cells left on the board
+                return imgCell.allSatisfy { $0.image != imageCell }
+            }
+
+            func checkForWinner() -> Bool {
+                //a loop that checks cells for winning positions
+                for combination in combinationOfWin {
+                    let (a, b, c) = (imgCell[combination[0]], imgCell[combination[1]], imgCell[combination[2]])
+                    if a.image != imageCell, a.image == b.image, b.image == c.image {
+                        return true
+                    }
+                }
+                return false
+            }
+        
+    
+    @IBAction func onPlayAgain(_ sender: UITapGestureRecognizer) {
+        resetGame()
     }
     
-    func resetGame(){
-        lblPlayer1.text = "Player 1"
-        lblPlayer2.text = "Player 2"
-        playerIsActive = true
-        lblInfoWinLoseDraw.isHidden = true
-        activePlayer = 1
+    @IBAction func onExitGame(_ sender: UITapGestureRecognizer) {
+        //print("Exit")
+                
+                let alert = UIAlertController(title: "Wait!", message: "Are you sure you want to leave the game?", preferredStyle: .alert)
+                
+                let actionYes = UIAlertAction(title: "Yes.", style: .default) { [self] _ in
+                    // go to WelcomeViewController
+                    performSegue(withIdentifier: self.segueExit, sender: nil)
+                }
+                
+                let actionNo = UIAlertAction(title: "No.", style: .cancel, handler: nil)
+                
+                alert.addAction(actionYes)
+                alert.addAction(actionNo)
+                
+                present(alert, animated: true, completion: nil)
+    }
+    
+    func resetGame() {
+                gameIsActive = true
+                lblInfoWinLoseDraw.isHidden = true
+                imgBtnOnPlayAgain.isHidden = true
+                currentPlayer = 1
+                imgCell.forEach { $0.image = imageCell }
+                updateUI()
+                updatePlayerLabelColors()
+            }
+
+            func updateUI() {
+                updatePlayersLabels()
+                updateScoreLabels()
+            }
+
+    func updatePlayersLabels() {
+        if gameMode == .PlayerVsPlayer {
+            lblPlayer1.text = player1Name
+            lblPlayer2.text = player2Name
+        } else {
+            lblPlayer1.text = playerWithAIName
+            lblPlayer2.text = playerAI
+        }
+    }
+
+
+            func updateScoreLabels() {
+                //updating player score information
+                lblX.text = String(player1Score)
+                lblO.text = String(player2Score)
+            }
         
-        //Resetting images in cells
-        for cell in imgCell {
-            cell.image = UIImage(named: "cell")
+    func updatePlayerLabelColors() {
+        
+        //print("currentPlayer: \(currentPlayer)")
+        
+        lblPlayer1.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+        lblPlayer2.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+
+        if gameMode == .PlayerVsPlayer {
+            lblX.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+            lblO.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
+        } else {
+            lblX.textColor = (currentPlayer == 1) ? activePlayerColor : inactivePlayerColor
+            lblO.textColor = (currentPlayer == 2) ? activePlayerColor : inactivePlayerColor
         }
     }
     
-   
-    @IBAction func onCellTap(_ sender: UITapGestureRecognizer) {
+
+
         
-        guard playerIsActive, let tappedCell = sender.view as? UIImageView else {return}
-        
-       // print("Tapped cell \(tappedCell.tag)")
-        
-        if tappedCell.image == UIImage(named: "cell") {
-            if activePlayer == 1 {
-                tappedCell.image = UIImage(named: "cross")
-                activePlayer = 2
-            }else {
-                tappedCell.image = UIImage(named: "nought")
-                activePlayer = 1
+          func updateScore() {
+                if currentPlayer == 1 {
+                    player1Score += 1
+                } else {
+                    player2Score += 1
+                }
+                updateScoreLabels()
             }
-            
-            
-            //check for winner
-            if checkForWinner(){
+
+            func showResult(message: String) {
                 lblInfoWinLoseDraw.isHidden = false
-                lblInfoWinLoseDraw.text = "Player \(activePlayer) wins!"
-                playerIsActive = false
-            } else{
-                if isGameDraw(){
-                    lblInfoWinLoseDraw.isHidden = false
-                    lblInfoWinLoseDraw.text = "It's a draw!"
-                    playerIsActive = false
+                lblInfoWinLoseDraw.text = message
+                gameIsActive = false
+            }
+    
+    func makeAIMove() {
+        if gameIsActive && gameMode == .PlayerVsAI && currentPlayer == 2 {
+            var emptyCells = [Int]()
+            for (index, cell) in imgCell.enumerated() {
+                if cell.image == imageCell {
+                    emptyCells.append(index)
+                }
+            }
+
+            if !emptyCells.isEmpty {
+                let randomIndex = Int.random(in: 0..<emptyCells.count)
+                let selectedCellIndex = emptyCells[randomIndex]
+                imgCell[selectedCellIndex].image = imageNought
+
+                if checkForWinner() {
+                    let winner = (currentPlayer == 1) ? playerWithAIName : playerAI
+                    showResult(message: "\(winner) wins!")
+                    print("Show: \(winner)")
+                    imgBtnOnPlayAgain.isHidden = false
+                    updateScore()
+                    gameIsActive = false
+                } else if isGameDraw() {
+                    showResult(message: "It's a draw!")
+                    imgBtnOnPlayAgain.isHidden = false
+                    gameIsActive = false
+                } else {
+                    currentPlayer = (currentPlayer == 1) ? 2 : 1
+                    updatePlayersLabels()
+                    updatePlayerLabelColors()
                 }
             }
         }
     }
-    
-    func isGameDraw() -> Bool {
-        for cell in imgCell {
-            if cell.image == UIImage(named: "cell") {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func checkForWinner() -> Bool {
-        
-        for combination in combinationOfWin {
-            let cell1 = imgCell[combination[0]]
-            let cell2 = imgCell[combination[1]]
-            let cell3 = imgCell[combination[2]]
-            
-            if cell1.image != UIImage(named: "cell") && cell1.image == cell2.image && cell2.image == cell3.image {
-                return true
-            }
-            
-        }
-        return false
-    }
-    
-    @IBAction func onReset(_ sender: UITapGestureRecognizer) {
-        resetGame()
-    }
-    
-
-
 }
