@@ -49,19 +49,19 @@ class WelcomeViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == segueToGame,
-               let gameVC = segue.destination as? GameViewController {
-                if isPlayingWithAI {
-                    gameVC.gameMode = .PlayerVsAI
-                    gameVC.playerWithAIName = txtPlayerWithAIName.text ?? "Cross"
-                    gameVC.playerAI = "AI"
-                } else {
-                    gameVC.gameMode = .PlayerVsPlayer
-                    gameVC.player1Name = txtPlayer1Name.text ?? "Cross"
-                    gameVC.player2Name = txtPlayer2Name.text ?? "Nought"
-                }
+        if segue.identifier == segueToGame,
+           let gameVC = segue.destination as? GameViewController {
+            gameVC.gameMode = isPlayingWithAI ? .PlayerVsAI : .PlayerVsPlayer
+            
+            if isPlayingWithAI {
+                gameVC.player1Name = txtPlayerWithAIName.text ?? "Cross"
+                gameVC.player2Name = "AI"
+            } else {
+                gameVC.player1Name = txtPlayer1Name.text ?? "Cross"
+                gameVC.player2Name = txtPlayer2Name.text ?? "Nought"
             }
         }
+    }
 
     
     @IBAction func onPlay(_ sender: UITapGestureRecognizer) {
@@ -90,7 +90,7 @@ class WelcomeViewController: UIViewController {
         }
         
     func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Warning!!!", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Warning!", message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
