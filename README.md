@@ -1,19 +1,15 @@
 # Tic-Tac-Toe
  Tic-tac-toe is a game in which two players take turns in drawing either an ` O' or an ` X' in one square of a grid consisting of nine squares. The winner is the first player to get three of the same symbols in a row.
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <style>
         .image-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        img {
-            max-width: 50%; /* Уменьшение размера картинки до 50% от исходного */
-            height: auto; /* Поддерживает соотношение сторон */
+           max-width: 200px;
+            height: auto;
+            margin: 10px;
         }
     </style>
 </head>
@@ -24,4 +20,3 @@
     </div>
 </body>
 </html>
-
