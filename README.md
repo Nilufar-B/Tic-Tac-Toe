@@ -5,18 +5,21 @@
 <html>
 <head>
     <style>
-        .image-container {
+        .image-row {
             display: flex;
-           max-width: 200px;
-            height: auto;
-            margin: 10px;
+        }
+        .image-row img {
+            width: 100px; 
+            height: auto; 
+            margin-right: 10px; 
         }
     </style>
 </head>
 <body>
-    <div class="image-container">
+    <div class="image-row">
         <img src="https://github.com/Nilufar-B/Tic-Tac-Toe/assets/112411542/4d4f607b-9a3d-4dd8-b87c-02b9e2ad66e4" alt="startScreen">
         <img src="https://github.com/Nilufar-B/Tic-Tac-Toe/assets/112411542/af4a9942-296c-4818-a692-564557cb5913" alt="gameScreen">
     </div>
 </body>
 </html>
+
