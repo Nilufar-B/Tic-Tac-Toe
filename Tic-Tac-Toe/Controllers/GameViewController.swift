@@ -11,6 +11,7 @@ class GameViewController: UIViewController {
     
     var gameMode: GameMode = .PlayerVsAI
     
+    
     @IBOutlet weak var lblO: UILabel!
     @IBOutlet weak var lblX: UILabel!
     @IBOutlet weak var lblPlayer1: UILabel!
@@ -18,8 +19,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var lblInfoWinLoseDraw: UILabel!
     @IBOutlet weak var imgBtnOnPlayAgain: UIImageView!
     @IBOutlet var imgCell: [UIImageView]!
-    
-    
+
 
     var currentPlayer = 1
         var gameIsActive = true
@@ -52,6 +52,7 @@ class GameViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
         
+         
             updatePlayersLabels()
             updatePlayerLabelColors()
             resetGame()
@@ -59,6 +60,7 @@ class GameViewController: UIViewController {
         
     
     @IBAction func onCellTap(_ sender: UITapGestureRecognizer) {
+      
  
             guard let tappedCell = sender.view as? UIImageView else { return }
 
