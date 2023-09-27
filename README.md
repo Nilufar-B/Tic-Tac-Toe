@@ -3,3 +3,4 @@
 
 
 
+<img width="705" alt="game" src="https://github.com/Nilufar-B/Tic-Tac-Toe/assets/112411542/9ba57d1b-fe85-40b1-b68c-fa19f4528a9a">
